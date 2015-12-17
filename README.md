@@ -7,7 +7,7 @@ easy to audit.
 
 ## Getting started
 
-### One-time setup:
+### One-time setup
 
 1. Install acme-nano (requires Go version 1.5+):
 
