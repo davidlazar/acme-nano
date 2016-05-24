@@ -73,9 +73,9 @@ func getNonce() string {
 }
 
 type JSONWebSignature struct {
-	Payload   string
-	Protected string
-	Signature string
+	Payload   string `json:"payload"`
+	Protected string `json:"protected"`
+	Signature string `json:"signature"`
 }
 
 func Sign(key *rsa.PrivateKey, payload []byte) *JSONWebSignature {
