@@ -18,10 +18,10 @@ var cmdCert = &Command{
 Cert generates HTTPS certificates signed by the Let's Encrypt CA.
 
 The -o flag specifies where to write the new certificate
-(default is <domain>.crt).
+(default is <domain>.cert.crt).
 
 The -p flag specifies where to write the private key for
-the new certificate (default is <domain>.key).
+the new certificate (default is <domain>.cert.key).
 
 If -chain is specified, the resulting certificate includes the
 intermediate (issuer) certificate.
@@ -31,8 +31,8 @@ intermediate (issuer) certificate.
 func init() {
 	cmdCert.Flag.StringVar(&accountKeyFile, "account", "", "account key file")
 	cmdCert.Flag.StringVar(&certDomain, "domain", "", "domain to issue certificate for")
-	cmdCert.Flag.StringVar(&certCertFile, "o", "", "certificate output (default: domain.crt)")
-	cmdCert.Flag.StringVar(&certPrivateKeyFile, "p", "", "private key output (default: domain.key)")
+	cmdCert.Flag.StringVar(&certCertFile, "o", "", "certificate output (default: <domain>.cert.crt)")
+	cmdCert.Flag.StringVar(&certPrivateKeyFile, "p", "", "private key output (default: <domain>.cert.key)")
 	cmdCert.Flag.BoolVar(&certChain, "chain", false, "include intermediate certificate in result")
 }
 
@@ -49,10 +49,10 @@ func Cert(cmd *Command, args []string) {
 		cmd.Usage()
 	}
 	if certPrivateKeyFile == "" {
-		certPrivateKeyFile = certDomain + ".key"
+		certPrivateKeyFile = certDomain + ".cert.key"
 	}
 	if certCertFile == "" {
-		certCertFile = certDomain + ".crt"
+		certCertFile = certDomain + ".cert.crt"
 	}
 
 	key, err := ReadKeyFile(accountKeyFile)
